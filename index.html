@@ -55,6 +55,20 @@
       text-align: center;
       padding: 10px;
     }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #004b8d;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -67,6 +81,7 @@
     <a href="#about">About</a>
     <a href="#programs">Programs</a>
     <a href="#research">Research</a>
+    <a href="#correlation">Correlation Types</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -95,11 +110,60 @@
     <p>Our research spans diverse areas including Algebra, Topology, Machine Learning, Number Theory, Data Visualization, and Educational Technology. We actively collaborate with international institutions and publish regularly in reputed journals.</p>
   </section>
 
+  <section id="correlation">
+    <h2>6 Types of Correlation in Data Science</h2>
+    <p>Below is a summary of commonly used correlation types in IT and data science:</p>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Formula (Key Variables)</th>
+        <th>When to Use</th>
+        <th>Example (IT)</th>
+      </tr>
+      <tr>
+        <td>Pearson</td>
+        <td>r = ∑(X−X̄)(Y−Ȳ) / sqrt(∑(X−X̄)² ∑(Y−Ȳ)²)</td>
+        <td>Both variables continuous; linear relationship</td>
+        <td>Experience vs Salary</td>
+      </tr>
+      <tr>
+        <td>Spearman</td>
+        <td>ρ = 1 - (6∑d²)/(n(n²-1)), where d = rank diff</td>
+        <td>Ordinal/ranked data, monotonic relation</td>
+        <td>Rating vs Product Returns</td>
+      </tr>
+      <tr>
+        <td>Kendall Tau</td>
+        <td>τ = (C - D) / (n(n-1)/2)</td>
+        <td>Small/tied ranked data</td>
+        <td>Search result vs user clicks</td>
+      </tr>
+      <tr>
+        <td>Point-Biserial</td>
+        <td>r = (Mean1 - Mean0) / StdDev × sqrt(n1n0/n²)</td>
+        <td>Binary + Continuous</td>
+        <td>Clicked vs Time Spent</td>
+      </tr>
+      <tr>
+        <td>Phi Coefficient</td>
+        <td>ϕ = (AD - BC) / sqrt((A+B)(C+D)(A+C)(B+D))</td>
+        <td>Two binary variables</td>
+        <td>Fraud vs Foreign Txn</td>
+      </tr>
+      <tr>
+        <td>Partial</td>
+        <td>r<sub>XY.Z</sub> = (r<sub>XY</sub> - r<sub>XZ</sub>r<sub>YZ</sub>) / sqrt((1−r<sub>XZ</sub>²)(1−r<sub>YZ</sub>²))</td>
+        <td>Remove third variable effect</td>
+        <td>Study Hours vs Marks (controlling Sleep)</td>
+      </tr>
+    </table>
+  </section>
+
   <section id="contact">
     <h2>Contact Us</h2>
     <p>Email: saponraj@gmail.com</p>
     <p>Phone: +91-9080078900</p>
-    <p>Locations:  Thathankulam, Thoothukudi, Tamil Nadu, India – 628622 &  Edinburgh, UK</p>
+    <p>Locations:  Thathankulam, Thoothukudi, Tamil Nadu, India – 628622 & Edinburgh, UK</p>
   </section>
 
   <footer>
