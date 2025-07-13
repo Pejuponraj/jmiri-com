@@ -55,19 +55,18 @@
       text-align: center;
       padding: 10px;
     }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 20px;
+    .formula-block {
+      margin-bottom: 30px;
     }
-    th, td {
-      border: 1px solid #999;
-      padding: 10px;
-      text-align: left;
+    .formula-block h3 {
+      color: #004b8d;
+      margin-bottom: 10px;
     }
-    th {
-      background-color: #004b8d;
-      color: white;
+    .formula-block img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -112,51 +111,55 @@
 
   <section id="correlation">
     <h2>6 Types of Correlation in Data Science</h2>
-    <p>Below is a summary of commonly used correlation types in IT and data science:</p>
-    <table>
-      <tr>
-        <th>Type</th>
-        <th>Formula (Key Variables)</th>
-        <th>When to Use</th>
-        <th>Example (IT)</th>
-      </tr>
-      <tr>
-        <td>Pearson</td>
-        <td>r = ∑(X−X̄)(Y−Ȳ) / sqrt(∑(X−X̄)² ∑(Y−Ȳ)²)</td>
-        <td>Both variables continuous; linear relationship</td>
-        <td>Experience vs Salary</td>
-      </tr>
-      <tr>
-        <td>Spearman</td>
-        <td>ρ = 1 - (6∑d²)/(n(n²-1)), where d = rank diff</td>
-        <td>Ordinal/ranked data, monotonic relation</td>
-        <td>Rating vs Product Returns</td>
-      </tr>
-      <tr>
-        <td>Kendall Tau</td>
-        <td>τ = (C - D) / (n(n-1)/2)</td>
-        <td>Small/tied ranked data</td>
-        <td>Search result vs user clicks</td>
-      </tr>
-      <tr>
-        <td>Point-Biserial</td>
-        <td>r = (Mean1 - Mean0) / StdDev × sqrt(n1n0/n²)</td>
-        <td>Binary + Continuous</td>
-        <td>Clicked vs Time Spent</td>
-      </tr>
-      <tr>
-        <td>Phi Coefficient</td>
-        <td>ϕ = (AD - BC) / sqrt((A+B)(C+D)(A+C)(B+D))</td>
-        <td>Two binary variables</td>
-        <td>Fraud vs Foreign Txn</td>
-      </tr>
-      <tr>
-        <td>Partial</td>
-        <td>r<sub>XY.Z</sub> = (r<sub>XY</sub> - r<sub>XZ</sub>r<sub>YZ</sub>) / sqrt((1−r<sub>XZ</sub>²)(1−r<sub>YZ</sub>²))</td>
-        <td>Remove third variable effect</td>
-        <td>Study Hours vs Marks (controlling Sleep)</td>
-      </tr>
-    </table>
+
+    <div class="formula-block">
+      <h3>1. Pearson Correlation</h3>
+      <img src="pearson_formula.png" alt="Pearson Formula">
+      <p><strong>Variables:</strong> X and Y - continuous variables</p>
+      <p><strong>Use When:</strong> You want to check linear relationship between numeric variables.</p>
+      <p><strong>Example:</strong> Experience vs Salary in IT field</p>
+    </div>
+
+    <div class="formula-block">
+      <h3>2. Spearman Rank Correlation</h3>
+      <img src="spearman_formula.png" alt="Spearman Formula">
+      <p><strong>Variables:</strong> d - difference between ranks of X and Y</p>
+      <p><strong>Use When:</strong> Data is ordinal or ranked, and relationship is monotonic.</p>
+      <p><strong>Example:</strong> Product rating rank vs number of returns</p>
+    </div>
+
+    <div class="formula-block">
+      <h3>3. Kendall Tau Correlation</h3>
+      <img src="kendall_formula.png" alt="Kendall Formula">
+      <p><strong>Variables:</strong> C - Concordant pairs, D - Discordant pairs</p>
+      <p><strong>Use When:</strong> Small sample size with tied ranks.</p>
+      <p><strong>Example:</strong> User click rank vs search result rank</p>
+    </div>
+
+    <div class="formula-block">
+      <h3>4. Point-Biserial Correlation</h3>
+      <img src="point-biserial_formula.png" alt="Point-Biserial Formula">
+      <p><strong>Variables:</strong> M1 & M0 - means for binary groups, SD - std dev</p>
+      <p><strong>Use When:</strong> One variable is binary, the other is continuous.</p>
+      <p><strong>Example:</strong> Clicked Ad (yes/no) vs Time Spent on site</p>
+    </div>
+
+    <div class="formula-block">
+      <h3>5. Phi Coefficient</h3>
+      <img src="phi_formula.png" alt="Phi Coefficient Formula">
+      <p><strong>Variables:</strong> A, B, C, D - values from 2x2 contingency table</p>
+      <p><strong>Use When:</strong> Both variables are binary.</p>
+      <p><strong>Example:</strong> Fraudulent Transaction vs Foreign Location (yes/no)</p>
+    </div>
+
+    <div class="formula-block">
+      <h3>6. Partial Correlation</h3>
+      <img src="partial_formula.png" alt="Partial Correlation Formula">
+      <p><strong>Variables:</strong> r values are Pearson correlation coefficients</p>
+      <p><strong>Use When:</strong> You want to control the effect of a third variable.</p>
+      <p><strong>Example:</strong> Study Hours vs Marks (controlling for Sleep)</p>
+    </div>
+
   </section>
 
   <section id="contact">
