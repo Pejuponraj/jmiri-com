@@ -25,6 +25,25 @@
       color: #004b8d;
       font-weight: bold;
     }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #dbe9f4;
+    }
+    pre {
+      background-color: #e8eef6;
+      padding: 15px;
+      overflow-x: auto;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -40,9 +59,48 @@
   </p>
   <img src="pearson_formula.png" alt="Pearson Correlation Formula" />
 
-  <p><strong>Example:</strong> Experience vs Salary among data scientists.</p>
+  <h2>📊 Sample Real-World Data</h2>
+  <p>Here is a sample dataset of employees showing years of experience vs salary:</p>
+  <table>
+    <tr><th>Employee</th><th>Experience (Years)</th><th>Salary (₹ in Lakhs)</th></tr>
+    <tr><td>Emp 1</td><td>1</td><td>3.0</td></tr>
+    <tr><td>Emp 2</td><td>2</td><td>3.5</td></tr>
+    <tr><td>Emp 3</td><td>3</td><td>4.2</td></tr>
+    <tr><td>Emp 4</td><td>4</td><td>5.0</td></tr>
+    <tr><td>Emp 5</td><td>5</td><td>5.8</td></tr>
+    <tr><td>Emp 6</td><td>6</td><td>6.1</td></tr>
+    <tr><td>Emp 7</td><td>7</td><td>6.5</td></tr>
+    <tr><td>Emp 8</td><td>8</td><td>7.2</td></tr>
+    <tr><td>Emp 9</td><td>9</td><td>7.8</td></tr>
+    <tr><td>Emp 10</td><td>10</td><td>8.3</td></tr>
+  </table>
+
+  <h2>🧪 Python Code Example</h2>
+  <p>You can use the following Python code to calculate and visualize the Pearson correlation:</p>
+  <pre><code>import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+
+# Sample dataset
+data = {
+    'Experience': [1,2,3,4,5,6,7,8,9,10],
+    'Salary': [3.0, 3.5, 4.2, 5.0, 5.8, 6.1, 6.5, 7.2, 7.8, 8.3]
+}
+df = pd.DataFrame(data)
+
+# Calculate Pearson correlation
+corr, _ = pearsonr(df['Experience'], df['Salary'])
+print(f"Pearson correlation: {corr:.2f}")
+
+# Plot the correlation
+sns.regplot(x='Experience', y='Salary', data=df)
+plt.title(f'Experience vs Salary (r = {corr:.2f})')
+plt.xlabel('Experience (Years)')
+plt.ylabel('Salary (in Lakhs)')
+plt.grid(True)
+plt.show()</code></pre>
 
   <a href="index.html">← Back to Home</a>
 </body>
 </html>
-
