@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TF-IDF Calculation Example</title>
+<title>TF-IDF Calculation Example with Python Code</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -11,148 +11,124 @@
     margin: 30px;
     color: #333;
   }
-  h1 {
+  h1, h2 {
     color: #4CAF50;
     border-bottom: 2px solid #4CAF50;
     padding-bottom: 10px;
   }
   table {
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     margin-bottom: 30px;
   }
   th, td {
     border: 1px solid #aaa;
     padding: 8px 12px;
     text-align: center;
+    font-family: monospace;
   }
   th {
     background-color: #4CAF50;
     color: white;
   }
-  caption {
-    font-weight: bold;
-    font-size: 1.2em;
-    margin: 10px 0 10px 0;
-  }
   .section {
     margin-bottom: 40px;
+  }
+  pre {
+    background: #e8f5e9;
+    padding: 15px;
+    border-left: 5px solid #4CAF50;
+    overflow-x: auto;
   }
 </style>
 </head>
 <body>
 
-<h1>TF-IDF Vectorization and Manual Calculation Example</h1>
+<h1>TF-IDF Manual Calculation with Sample Vocabulary</h1>
 
 <div class="section">
-  <h2>Vocabulary</h2>
-  <p>List of unique words extracted from the corpus after preprocessing:</p>
-  <table>
-    <tr>
-      <th>Index</th>
-      <th>Word</th>
-    </tr>
-    <tr><td>0</td><td>delivery</td></tr>
-    <tr><td>1</td><td>excellent</td></tr>
-    <tr><td>2</td><td>fast</td></tr>
-    <tr><td>3</td><td>love</td></tr>
-    <tr><td>4</td><td>poor</td></tr>
-    <tr><td>5</td><td>product</td></tr>
-    <tr><td>6</td><td>quality</td></tr>
-    <tr><td>7</td><td>service</td></tr>
-    <tr><td>8</td><td>slow</td></tr>
-    <tr><td>9</td><td>bad</td></tr>
-  </table>
+  <h2>Sample Vocabulary (100 Words)</h2>
+  <p>A list of 100 common review words:</p>
+  <p>love, product, good, bad, hate, quality, price, fast, slow, recommend, easy, use, comfortable, durable, cheap, expensive, color, size, delivery, service, customer, support, broken, return, refund, happy, unhappy, satisfied, unsatisfied, performance, battery, life, design, material, excellent, poor, value, money, warranty, replacement, experience, damage, packaging, brand, function, feature, manual, instruction, weight, light, heavy, sound, noise, screen, resolution, camera, picture, software, update, compatibility, connectivity, speed, memory, storage, button, keyboard, mouse, charger, adapter, port, cable, wireless, bluetooth, wifi, signal, range, comfort, style, fashion, trend, fit, wash, fabric, stitch, durability</p>
 </div>
 
 <div class="section">
-  <h2>Document Frequency (DF) for Each Word</h2>
+  <h2>Mini Example Corpus</h2>
+  <ol>
+    <li>Doc 1: "love product quality and fast delivery"</li>
+    <li>Doc 2: "bad product slow delivery and poor service"</li>
+    <li>Doc 3: "excellent quality and fast service"</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>Document Frequency (DF)</h2>
   <table>
-    <tr>
-      <th>Word</th>
-      <th>Number of Documents Containing Word (DF)</th>
-    </tr>
-    <tr><td>delivery</td><td>2</td></tr>
-    <tr><td>excellent</td><td>1</td></tr>
-    <tr><td>fast</td><td>2</td></tr>
+    <tr><th>Word</th><th>DF</th></tr>
     <tr><td>love</td><td>1</td></tr>
-    <tr><td>poor</td><td>1</td></tr>
     <tr><td>product</td><td>2</td></tr>
     <tr><td>quality</td><td>2</td></tr>
-    <tr><td>service</td><td>2</td></tr>
-    <tr><td>slow</td><td>1</td></tr>
+    <tr><td>fast</td><td>2</td></tr>
+    <tr><td>delivery</td><td>2</td></tr>
     <tr><td>bad</td><td>1</td></tr>
+    <tr><td>service</td><td>2</td></tr>
+    <tr><td>poor</td><td>1</td></tr>
+    <tr><td>excellent</td><td>1</td></tr>
   </table>
 </div>
 
 <div class="section">
   <h2>Inverse Document Frequency (IDF)</h2>
-  <p>Calculated using formula: <code>log((N + 1) / (DF + 1)) + 1</code>, where <code>N=3</code> documents.</p>
+  <p>Using: <code>IDF = log((N + 1)/(DF + 1)) + 1</code>, where N = 3</p>
   <table>
-    <tr>
-      <th>Word</th>
-      <th>IDF Value</th>
-    </tr>
-    <tr><td>delivery</td><td>1.287</td></tr>
-    <tr><td>excellent</td><td>1.693</td></tr>
-    <tr><td>fast</td><td>1.287</td></tr>
+    <tr><th>Word</th><th>IDF</th></tr>
     <tr><td>love</td><td>1.693</td></tr>
-    <tr><td>poor</td><td>1.693</td></tr>
     <tr><td>product</td><td>1.287</td></tr>
     <tr><td>quality</td><td>1.287</td></tr>
-    <tr><td>service</td><td>1.287</td></tr>
-    <tr><td>slow</td><td>1.693</td></tr>
+    <tr><td>fast</td><td>1.287</td></tr>
+    <tr><td>delivery</td><td>1.287</td></tr>
     <tr><td>bad</td><td>1.693</td></tr>
+    <tr><td>service</td><td>1.287</td></tr>
+    <tr><td>poor</td><td>1.693</td></tr>
+    <tr><td>excellent</td><td>1.693</td></tr>
   </table>
 </div>
 
 <div class="section">
-  <h2>Term Frequency (TF) for Document 1</h2>
-  <p>Document 1: "love product quality fast delivery" (5 words)</p>
+  <h2>TF for Document 1</h2>
+  <p>Total words (excluding stopwords): 5</p>
   <table>
-    <tr>
-      <th>Word</th>
-      <th>TF (Count / 5)</th>
-    </tr>
+    <tr><th>Word</th><th>TF</th></tr>
     <tr><td>love</td><td>0.2</td></tr>
     <tr><td>product</td><td>0.2</td></tr>
     <tr><td>quality</td><td>0.2</td></tr>
     <tr><td>fast</td><td>0.2</td></tr>
     <tr><td>delivery</td><td>0.2</td></tr>
-    <tr><td>others</td><td>0</td></tr>
   </table>
 </div>
 
 <div class="section">
-  <h2>Raw TF-IDF Vector for Document 1</h2>
+  <h2>Raw TF-IDF for Document 1</h2>
   <table>
-    <tr>
-      <th>Word</th>
-      <th>TF-IDF (TF × IDF)</th>
-    </tr>
-    <tr><td>love</td><td>0.339</td></tr>
-    <tr><td>product</td><td>0.257</td></tr>
-    <tr><td>quality</td><td>0.257</td></tr>
-    <tr><td>fast</td><td>0.257</td></tr>
-    <tr><td>delivery</td><td>0.257</td></tr>
-    <tr><td>others</td><td>0</td></tr>
+    <tr><th>Word</th><th>TF</th><th>IDF</th><th>TF-IDF</th></tr>
+    <tr><td>love</td><td>0.2</td><td>1.693</td><td>0.339</td></tr>
+    <tr><td>product</td><td>0.2</td><td>1.287</td><td>0.257</td></tr>
+    <tr><td>quality</td><td>0.2</td><td>1.287</td><td>0.257</td></tr>
+    <tr><td>fast</td><td>0.2</td><td>1.287</td><td>0.257</td></tr>
+    <tr><td>delivery</td><td>0.2</td><td>1.287</td><td>0.257</td></tr>
   </table>
 </div>
 
 <div class="section">
-  <h2>Normalized TF-IDF Vector for Document 1</h2>
-  <p>L2 norm of raw vector = 0.616</p>
+  <h2>Normalized TF-IDF Vector (L2 Norm)</h2>
+  <p>Norm = sqrt(0.339² + 4 × 0.257²) = 0.6158</p>
   <table>
-    <tr>
-      <th>Word</th>
-      <th>Normalized TF-IDF</th>
-    </tr>
-    <tr><td>love</td><td>0.550</td></tr>
-    <tr><td>product</td><td>0.417</td></tr>
-    <tr><td>quality</td><td>0.417</td></tr>
-    <tr><td>fast</td><td>0.417</td></tr>
-    <tr><td>delivery</td><td>0.417</td></tr>
-    <tr><td>others</td><td>0</td></tr>
+    <tr><th>Word</th><th>TF-IDF</th><th>Normalized</th></tr>
+    <tr><td>love</td><td>0.339</td><td>0.550</td></tr>
+    <tr><td>product</td><td>0.257</td><td>0.418</td></tr>
+    <tr><td>quality</td><td>0.257</td><td>0.418</td></tr>
+    <tr><td>fast</td><td>0.257</td><td>0.418</td></tr>
+    <tr><td>delivery</td><td>0.257</td><td>0.418</td></tr>
   </table>
 </div>
 
@@ -212,6 +188,26 @@
       <td>0</td>
     </tr>
   </table>
+</div>
+
+<div class="section">
+  <h2>Python Code for TF-IDF Calculation (using sklearn)</h2>
+  <pre>
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+corpus = [
+    "love product quality and fast delivery",
+    "bad product slow delivery and poor service",
+    "excellent quality and fast service"
+]
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(corpus)
+
+print("Vocabulary:", vectorizer.get_feature_names_out())
+print("TF-IDF matrix (dense):")
+print(X.toarray())
+  </pre>
 </div>
 
 </body>
