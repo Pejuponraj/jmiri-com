@@ -47,10 +47,23 @@
 <h1>TF-IDF Manual Calculation with Sample Vocabulary</h1>
 
 <div class="section">
+  <h2>Text Preprocessing Libraries Used</h2>
+  <p>For cleaning the text data, the following Python libraries and methods are commonly used:</p>
+  <ul>
+    <li><strong>HTML Tag Removal:</strong> Using the <code>re</code> module with regex, e.g., <code>re.sub(r'&lt;.*?&gt;', '', text)</code>.</li>
+    <li><strong>Stopwords Removal:</strong> From the <code>nltk.corpus</code> library:
+      <pre><code>from nltk.corpus import stopwords
+stop_words = set(stopwords.words('english'))</code></pre>
+    </li>
+  </ul>
+</div>
+
+<div class="section">
   <h2>Sample Vocabulary (100 Words)</h2>
   <p>A list of 100 common review words:</p>
   <p>love, product, good, bad, hate, quality, price, fast, slow, recommend, easy, use, comfortable, durable, cheap, expensive, color, size, delivery, service, customer, support, broken, return, refund, happy, unhappy, satisfied, unsatisfied, performance, battery, life, design, material, excellent, poor, value, money, warranty, replacement, experience, damage, packaging, brand, function, feature, manual, instruction, weight, light, heavy, sound, noise, screen, resolution, camera, picture, software, update, compatibility, connectivity, speed, memory, storage, button, keyboard, mouse, charger, adapter, port, cable, wireless, bluetooth, wifi, signal, range, comfort, style, fashion, trend, fit, wash, fabric, stitch, durability</p>
 </div>
+
 
 <div class="section">
   <h2>Mini Example Corpus</h2>
