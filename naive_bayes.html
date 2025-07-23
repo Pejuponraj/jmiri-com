@@ -165,7 +165,47 @@
     </table>
   </div>
 
-  <div class="step">
+ <div class="step">
     <h2>Step 4: Word Probabilities per Class (Laplace Smoothing)</h2>
     <p>Probability formula for word <code>w</code> given class <code>c</code>:</p>
-    <pre><code>P(w | c) = (count(w in c) + 1)
+    <pre><code>P(w | c) = (count(w in c) + 1) / (total words in c + vocabulary size)</code></pre>
+    <p>Example assumptions:</p>
+    <ul>
+      <li>Total words in Positive = 20</li>
+      <li>Total words in Negative = 25</li>
+      <li>Total words in Neutral = 5</li>
+      <li>Vocabulary size = 27</li>
+    </ul>
+    <p>Example calculation for word <code>bad</code>:</p>
+    <ul>
+      <li><strong>Negative:</strong> (4 + 1) / (25 + 27) = 5 / 52 ≈ 0.096</li>
+      <li><strong>Positive:</strong> (0 + 1) / (20 + 27) = 1 / 47 ≈ 0.021</li>
+    </ul>
+    <p>This means if a review contains "bad", the model is more likely to classify it as <strong>Negative</strong>.</p>
+  </div>
+
+  <div class="step">
+    <h2>Step 5: Predicting a New Review</h2>
+    <p>Given new review:</p>
+    <p><em>"This product is bad and not useful"</em></p>
+    <p>After cleaning: <code>product bad not useful</code></p>
+    <p>The model calculates the probability for each class by multiplying the word probabilities and the prior class probability:</p>
+    <pre><code>P(Negative | input) = P(bad | Negative) * P(not | Negative) * P(useful | Negative) * P(Negative prior)
+P(Positive | input) = P(bad | Positive) * P(not | Positive) * P(useful | Positive) * P(Positive prior)
+P(Neutral  | input) = P(bad | Neutral) * P(not | Neutral) * P(useful | Neutral) * P(Neutral prior)</code></pre>
+    <p>The class with the highest probability is selected.</p>
+    <p><strong>Prediction result: <code>Negative</code></strong></p>
+  </div>
+
+  <div class="step">
+    <h2>Summary</h2>
+    <p>
+      We started with 10 reviews and their star ratings. We converted those ratings to sentiment labels (Positive, Neutral, Negative). 
+      We cleaned the review texts, built a vocabulary, and counted word frequencies per sentiment class. 
+      Using the Naive Bayes formula with Laplace smoothing, we calculated the probability of each word in each class.
+      Finally, for a new review, we multiplied the probabilities of its words given each class and predicted the sentiment class with the highest probability.
+    </p>
+  </div>
+
+</body>
+</html>
