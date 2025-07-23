@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naive Bayes Sentiment Analysis Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    pre {
+      background-color: #f1f1f1;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sentiment Analysis with Naive Bayes</h1>
+  <h2>📝 Sample Reviews Dataset (10 rows)</h2>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Review</th>
+      <th>Score</th>
+      <th>Sentiment</th>
+    </tr>
+    <tr><td>1</td><td>Very bad quality, not worth it</td><td>1</td><td>Negative</td></tr>
+    <tr><td>2</td><td>Excellent product, really useful</td><td>5</td><td>Positive</td></tr>
+    <tr><td>3</td><td>Not good, damaged item</td><td>2</td><td>Negative</td></tr>
+    <tr><td>4</td><td>Amazing quality and fast delivery</td><td>5</td><td>Positive</td></tr>
+    <tr><td>5</td><td>Worst purchase ever made</td><td>1</td><td>Negative</td></tr>
+    <tr><td>6</td><td>Product is okay, nothing special</td><td>3</td><td>Neutral</td></tr>
+    <tr><td>7</td><td>Very satisfied with the performance</td><td>4</td><td>Positive</td></tr>
+    <tr><td>8</td><td>Poor design and bad material</td><td>2</td><td>Negative</td></tr>
+    <tr><td>9</td><td>Absolutely love this product</td><td>5</td><td>Positive</td></tr>
+    <tr><td>10</td><td>Delivery was late and packaging was bad</td><td>2</td><td>Negative</td></tr>
+  </table>
+
+  <h2>📚 Vocabulary Extracted (After Cleaning)</h2>
+  <p><code>['bad', 'quality', 'worth', 'excellent', 'product', 'useful', 'not', 'good', 'damaged', 'item', 'amazing', 'fast', 'delivery', 'worst', 'purchase', 'made', 'okay', 'nothing', 'special', 'satisfied', 'performance', 'poor', 'design', 'material', 'love', 'late', 'packaging']</code></p>
+
+  <h2>🧠 Sample Probability Calculation (Laplace Smoothing)</h2>
+  <pre><code># For word 'bad' in Negative class:
+P(bad | Negative) = (count + 1) / (total_words + vocab_size)
+                 = (4 + 1) / (25 + 27) = 5 / 52 = 0.096
+
+# For same word in Positive class:
+P(bad | Positive) = (0 + 1) / (20 + 27) = 1 / 47 = 0.021</code></pre>
+
+  <h2>🐍 Python Code (Backend Simulation)</h2>
+  <pre><code>from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+import pandas as pd
+
+# Step 1: Define reviews
+reviews = [
+    "Very bad quality, not worth it",
+    "Excellent product, really useful",
+    "Not good, damaged item",
+    "Amazing quality and fast delivery",
+    "Worst purchase ever made",
+    "Product is okay, nothing special",
+    "Very satisfied with the performance",
+    "Poor design and bad material",
+    "Absolutely love this product",
+    "Delivery was late and packaging was bad"
+]
+scores = [1, 5, 2, 5, 1, 3, 4, 2, 5, 2]
+
+def convert_score(score):
+    if score >= 4:
+        return "Positive"
+    elif score == 3:
+        return "Neutral"
+    else:
+        return "Negative"
+
+labels = list(map(convert_score, scores))
+
+# Step 2: Vectorize
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(reviews)
+
+# Step 3: Train model
+model = MultinomialNB()
+model.fit(X, labels)
+
+# Step 4: Predict
+sample = ["This product is bad and not useful"]
+sample_vect = vectorizer.transform(sample)
+pred = model.predict(sample_vect)
+print("Predicted Sentiment:", pred[0])</code></pre>
+
+  <h2>✅ Final Output</h2>
+  <p><strong>Predicted Sentiment:</strong> <code>Negative</code> (based on high probability of words like "bad", "not")</p>
+</body>
+</html>
