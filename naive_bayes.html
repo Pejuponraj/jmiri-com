@@ -1,119 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Naive Bayes Sentiment Analysis Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Naive Bayes Sentiment Analysis Explained</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f9f9f9;
+      margin: 20px;
+      background: #f0f4f8;
+      color: #222;
+      line-height: 1.6;
     }
-    h1, h2 {
-      color: #333;
+    h1, h2, h3 {
+      color: #004b8d;
     }
     table {
-      width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
+      width: 100%;
+      margin-bottom: 25px;
+      background: white;
     }
     th, td {
-      padding: 8px;
+      border: 1px solid #aaa;
+      padding: 8px 12px;
       text-align: left;
     }
-    pre {
-      background-color: #f1f1f1;
-      padding: 10px;
-      overflow-x: auto;
+    th {
+      background: #004b8d;
+      color: white;
     }
     code {
+      background: #eee;
+      padding: 2px 6px;
       font-family: Consolas, monospace;
-      color: #222;
+      border-radius: 3px;
+    }
+    pre {
+      background: #222;
+      color: #eee;
+      padding: 12px;
+      overflow-x: auto;
+      border-radius: 5px;
+      font-family: Consolas, monospace;
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 5px 8px;
+      border-left: 4px solid #ffeeba;
+      margin-bottom: 20px;
+    }
+    .step {
+      margin-bottom: 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 6px #aaa3;
     }
   </style>
 </head>
 <body>
-  <h1>Sentiment Analysis with Naive Bayes</h1>
-  <h2>📝 Sample Reviews Dataset (10 rows)</h2>
-  <table>
-    <tr>
-      <th>#</th>
-      <th>Review</th>
-      <th>Score</th>
-      <th>Sentiment</th>
-    </tr>
-    <tr><td>1</td><td>Very bad quality, not worth it</td><td>1</td><td>Negative</td></tr>
-    <tr><td>2</td><td>Excellent product, really useful</td><td>5</td><td>Positive</td></tr>
-    <tr><td>3</td><td>Not good, damaged item</td><td>2</td><td>Negative</td></tr>
-    <tr><td>4</td><td>Amazing quality and fast delivery</td><td>5</td><td>Positive</td></tr>
-    <tr><td>5</td><td>Worst purchase ever made</td><td>1</td><td>Negative</td></tr>
-    <tr><td>6</td><td>Product is okay, nothing special</td><td>3</td><td>Neutral</td></tr>
-    <tr><td>7</td><td>Very satisfied with the performance</td><td>4</td><td>Positive</td></tr>
-    <tr><td>8</td><td>Poor design and bad material</td><td>2</td><td>Negative</td></tr>
-    <tr><td>9</td><td>Absolutely love this product</td><td>5</td><td>Positive</td></tr>
-    <tr><td>10</td><td>Delivery was late and packaging was bad</td><td>2</td><td>Negative</td></tr>
-  </table>
 
-  <h2>📚 Vocabulary Extracted (After Cleaning)</h2>
-  <p><code>['bad', 'quality', 'worth', 'excellent', 'product', 'useful', 'not', 'good', 'damaged', 'item', 'amazing', 'fast', 'delivery', 'worst', 'purchase', 'made', 'okay', 'nothing', 'special', 'satisfied', 'performance', 'poor', 'design', 'material', 'love', 'late', 'packaging']</code></p>
+  <h1>Naive Bayes Sentiment Analysis: Step-by-Step Explanation</h1>
 
-  <h2>🧠 Sample Probability Calculation (Laplace Smoothing)</h2>
-  <pre><code># For word 'bad' in Negative class:
-P(bad | Negative) = (count + 1) / (total_words + vocab_size)
-                 = (4 + 1) / (25 + 27) = 5 / 52 = 0.096
+  <div class="step">
+    <h2>🔢 Mini Dataset with 10 Reviews</h2>
+    <p>Here are 10 Amazon product reviews:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Review ID</th>
+          <th>Review Text</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Very bad quality, not worth it</td><td>1</td></tr>
+        <tr><td>2</td><td>Excellent product, really useful</td><td>5</td></tr>
+        <tr><td>3</td><td>Not good, damaged item</td><td>2</td></tr>
+        <tr><td>4</td><td>Amazing quality and fast delivery</td><td>5</td></tr>
+        <tr><td>5</td><td>Worst purchase ever made</td><td>1</td></tr>
+        <tr><td>6</td><td>Product is okay, nothing special</td><td>3</td></tr>
+        <tr><td>7</td><td>Very satisfied with the performance</td><td>4</td></tr>
+        <tr><td>8</td><td>Poor design and bad material</td><td>2</td></tr>
+        <tr><td>9</td><td>Absolutely love this product</td><td>5</td></tr>
+        <tr><td>10</td><td>Delivery was late and packaging was bad</td><td>2</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-# For same word in Positive class:
-P(bad | Positive) = (0 + 1) / (20 + 27) = 1 / 47 = 0.021</code></pre>
-
-  <h2>🐍 Python Code (Backend Simulation)</h2>
-  <pre><code>from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-import pandas as pd
-
-# Step 1: Define reviews
-reviews = [
-    "Very bad quality, not worth it",
-    "Excellent product, really useful",
-    "Not good, damaged item",
-    "Amazing quality and fast delivery",
-    "Worst purchase ever made",
-    "Product is okay, nothing special",
-    "Very satisfied with the performance",
-    "Poor design and bad material",
-    "Absolutely love this product",
-    "Delivery was late and packaging was bad"
-]
-scores = [1, 5, 2, 5, 1, 3, 4, 2, 5, 2]
-
-def convert_score(score):
-    if score >= 4:
+  <div class="step">
+    <h2>Step 1: Convert Score to Sentiment</h2>
+    <p>Apply this Python function to convert scores to sentiments:</p>
+    <pre><code>def convert_score(score):
+    if score &gt;= 4:
         return "Positive"
     elif score == 3:
         return "Neutral"
     else:
         return "Negative"
+</code></pre>
+    <p>After conversion:</p>
+    <table>
+      <thead>
+        <tr><th>Review Text</th><th>Score</th><th>Sentiment</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Very bad quality, not worth it</td><td>1</td><td>Negative</td></tr>
+        <tr><td>Excellent product, really useful</td><td>5</td><td>Positive</td></tr>
+        <tr><td>Not good, damaged item</td><td>2</td><td>Negative</td></tr>
+        <tr><td>Amazing quality and fast delivery</td><td>5</td><td>Positive</td></tr>
+        <tr><td>Worst purchase ever made</td><td>1</td><td>Negative</td></tr>
+        <tr><td>Product is okay, nothing special</td><td>3</td><td>Neutral</td></tr>
+        <tr><td>Very satisfied with the performance</td><td>4</td><td>Positive</td></tr>
+        <tr><td>Poor design and bad material</td><td>2</td><td>Negative</td></tr>
+        <tr><td>Absolutely love this product</td><td>5</td><td>Positive</td></tr>
+        <tr><td>Delivery was late and packaging was bad</td><td>2</td><td>Negative</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-labels = list(map(convert_score, scores))
+  <div class="step">
+    <h2>Step 2: Preprocessing (Cleaned Reviews)</h2>
+    <p>After cleaning (removing stopwords, lowercasing, etc.), the reviews look like this:</p>
+    <table>
+      <thead>
+        <tr><th>Cleaned Review</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>bad quality worth</td></tr>
+        <tr><td>excellent product useful</td></tr>
+        <tr><td>not good damaged item</td></tr>
+        <tr><td>amazing quality fast delivery</td></tr>
+        <tr><td>worst purchase made</td></tr>
+        <tr><td>product okay nothing special</td></tr>
+        <tr><td>satisfied performance</td></tr>
+        <tr><td>poor design bad material</td></tr>
+        <tr><td>love product</td></tr>
+        <tr><td>delivery late packaging bad</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-# Step 2: Vectorize
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(reviews)
+  <div class="step">
+    <h2>Step 3: Count Word Frequencies (Bag of Words)</h2>
+    <p>Vocabulary of unique words:</p>
+    <code>
+      ['bad', 'quality', 'worth', 'excellent', 'product', 'useful',<br />
+      'not', 'good', 'damaged', 'item', 'amazing', 'fast', 'delivery',<br />
+      'worst', 'purchase', 'made', 'okay', 'nothing', 'special',<br />
+      'satisfied', 'performance', 'poor', 'design', 'material',<br />
+      'love', 'late', 'packaging']
+    </code>
+    <p>Example word counts per class for three words:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Word</th>
+          <th>Negative</th>
+          <th>Positive</th>
+          <th>Neutral</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>bad</td><td>4 times</td><td>0 times</td><td>0 times</td></tr>
+        <tr><td>good</td><td>1 time</td><td>0 times</td><td>0 times</td></tr>
+        <tr><td>excellent</td><td>0 times</td><td>1 time</td><td>0 times</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-# Step 3: Train model
-model = MultinomialNB()
-model.fit(X, labels)
+  <div class="step">
+    <h2>Step 4: Word Probabilities per Class (Laplace Smoothing)</h2>
+    <p>Probability formula for word <code>w</code> given class <code>c</code>:</p>
+    <pre><code>P(w | c) = (count(w in c) + 1) / (total words in c + vocabulary size)</code></pre>
+    <p>Example assumptions:</p>
+    <ul>
+      <li>Total words in Positive = 20</li>
+      <li>Total words in Negative = 25</li>
+      <li>Total words in Neutral = 5</li>
+      <li>Vocabulary size = 27</li>
+    </ul>
+    <p>Example calculation for word <code>bad</code>:</p>
+    <ul>
+      <li><strong>Negative:</strong> (4 + 1) / (25 + 27) = 5 / 52 ≈ 0.096</li>
+      <li><strong>Positive:</strong> (0 + 1) / (20 + 27) = 1 / 47 ≈ 0.021</li>
+    </ul>
+    <p>This means if review contains "bad", the model is more likely to classify it as <strong>Negative</strong>.</p>
+  </div>
 
-# Step 4: Predict
-sample = ["This product is bad and not useful"]
-sample_vect = vectorizer.transform(sample)
-pred = model.predict(sample_vect)
-print("Predicted Sentiment:", pred[0])</code></pre>
+  <div class="step">
+    <h2>Step 5: Predicting a New Review</h2>
+    <p>Given new review:</p>
+    <p><em>"This product is bad and not useful"</em></p>
+    <p>After cleaning: <code>product bad not useful</code></p>
+    <p>The model calculates the probability for each class by multiplying the word probabilities and the prior class probability:</p>
+    <pre><code>
+P(Negative | input) = P(bad | Negative) × P(not | Negative) × P(useful | Negative) × P(Negative prior)
+P(Positive | input) = P(bad | Positive) × P(not | Positive) × P(useful | Positive) × P(Positive prior)
+P(Neutral  | input) = P(bad | Neutral) × P(not | Neutral) × P(useful | Neutral) × P(Neutral prior)
+    </code></pre>
+    <p>The class with the highest probability is selected.</p>
+    <p><strong>Prediction result: <code>Negative</code></strong></p>
+  </div>
 
-  <h2>✅ Final Output</h2>
-  <p><strong>Predicted Sentiment:</strong> <code>Negative</code> (based on high probability of words like "bad", "not")</p>
+  <div class="step">
+    <h2>Summary</h2>
+    <p>
+      We started with 10 reviews and their star ratings. We converted those ratings to sentiment labels (Positive, Neutral, Negative). 
+      We cleaned the review texts, built a vocabulary, and counted word frequencies per sentiment class. 
+      Using the Naive Bayes formula with Laplace smoothing, we calculated the probability of each word in each class.
+      Finally, for a new review, we multiplied the probabilities of its words given each class and predicted the sentiment class with the highest probability.
+    </p>
+  </div>
+
 </body>
 </html>
