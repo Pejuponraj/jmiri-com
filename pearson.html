@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pearson Correlation | JMIRI</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0; background: #f5f7fa; color: #222;
       line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f7fa;
-      color: #222;
     }
     header {
       background-color: #004b8d;
@@ -20,27 +17,18 @@
       text-align: center;
     }
     section {
-      padding: 40px;
       max-width: 900px;
-      margin: auto;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #004b8d;
     }
-    code {
-      background-color: #eef;
-      padding: 2px 6px;
-      display: inline-block;
-      margin: 10px 0;
-    }
-    pre {
-      background-color: #eef;
-      padding: 15px;
-      overflow-x: auto;
-    }
-    img {
-      max-width: 100%;
-      margin-top: 20px;
+    img.formula {
+      display: block;
+      max-width: 60%;
+      margin: 20px auto;
+      height: auto;
     }
     table {
       width: 100%;
@@ -52,12 +40,21 @@
       padding: 8px;
       text-align: center;
     }
+    code {
+      background-color: #eef;
+      padding: 10px;
+      display: block;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
     footer {
+      text-align: center;
       background-color: #002b5c;
       color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      padding: 15px 0;
+      margin-top: 50px;
     }
   </style>
 </head>
@@ -74,22 +71,18 @@
   </section>
 
   <section>
-    <h2>Real-Life Example</h2>
-    <p><strong>Scenario:</strong> Analyze the correlation between years of experience and salary in a tech company.</p>
-    <ul>
-      <li>X = Years of Experience</li>
-      <li>Y = Monthly Salary (in thousands)</li>
-    </ul>
-    <p><strong>Data:</strong></p>
-    <pre>X = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]</pre>
+    <h2>Formula</h2>
+    <p><strong>Pearson correlation (r) is calculated using the formula:</strong></p>
+    <img src="pearson_formula.png" alt="Pearson Correlation Formula" class="formula" />
   </section>
 
   <section>
-    <h2>Formula</h2>
-    <p>Pearson correlation (r) is calculated using the formula:</p>
-    <p><code>r = [nΣ(XY) - ΣXΣY] / sqrt([nΣX² - (ΣX)²][nΣY² - (ΣY)²])</code></p>
-    <p><strong>Manual Calculation Table:</strong></p>
+    <h2>Example Data</h2>
+    <p><strong>Scenario:</strong> Analyze the correlation between years of experience and monthly salary (in thousands).</p>
+    <pre>X = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]</pre>
+
+    <h3>Manual Calculation Table</h3>
     <table>
       <tr>
         <th>X</th><th>Y</th><th>XY</th><th>X²</th><th>Y²</th>
@@ -105,23 +98,28 @@ Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]</pre>
       <tr><td>9</td><td>60</td><td>540</td><td>81</td><td>3600</td></tr>
       <tr><td>10</td><td>64</td><td>640</td><td>100</td><td>4096</td></tr>
     </table>
-    <p>Now calculate:</p>
+    <p>Calculate sums:</p>
     <ul>
-      <li>ΣX = 55, ΣY = 470, ΣXY = 2887</li>
-      <li>ΣX² = 385, ΣY² = 23198</li>
+      <li>ΣX = 55</li>
+      <li>ΣY = 470</li>
+      <li>ΣXY = 2887</li>
+      <li>ΣX² = 385</li>
+      <li>ΣY² = 23198</li>
       <li>n = 10</li>
     </ul>
-    <p>Substitute into the formula:</p>
-    <code>r = [10*2887 - 55*470] / sqrt([10*385 - 55²][10*23198 - 470²])</code><br>
-    <code>r = [28870 - 25850] / sqrt([3850 - 3025][231980 - 220900])</code><br>
-    <code>r = 3020 / sqrt(825 * 11080)</code><br>
-    <code>r ≈ 3020 / 3015.77 ≈ 1.0014 → rounded to 1.00</code>
+    <p>Substitute in the formula:</p>
+    <code>r = [nΣ(XY) - ΣXΣY] / sqrt{ [nΣX² - (ΣX)²] [nΣY² - (ΣY)²] }</code><br>
+    <code>r = [10 × 2887 - 55 × 470] / sqrt{ [10 × 385 - 55²] [10 × 23198 - 470²] }</code><br>
+    <code>r = (28870 - 25850) / sqrt{ (3850 - 3025) × (231980 - 220900) }</code><br>
+    <code>r = 3020 / sqrt(825 × 11080)</code><br>
+    <code>r ≈ 3020 / 3015.77 ≈ 1.00</code>
     <p>This result indicates a nearly perfect positive correlation.</p>
   </section>
 
   <section>
     <h2>Python Code with Graph</h2>
-    <pre><code>import numpy as np
+    <code>
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
 
@@ -143,150 +141,19 @@ plt.xlabel('Years of Experience')
 plt.ylabel('Monthly Salary (in 1000s)')
 plt.legend()
 plt.grid(True)
-plt.show()</code></pre>
-    <p><strong>Graph Output:</strong></p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/640px-Linear_regression.svg.png" alt="Scatter plot with line of best fit" />
+plt.show()
+    </code>
+    <p><strong>Graph Output Example:</strong></p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/640px-Linear_regression.svg.png" alt="Scatter plot with line of best fit" style="max-width: 80%; display: block; margin: 20px auto;">
   </section>
 
   <section>
     <h2>Interpretation</h2>
-    <p>The correlation coefficient near +1 shows a strong positive relationship between experience and salary. A significant p-value (&lt; 0.05) confirms the relationship is statistically meaningful. The scatter plot and red trend line show that as experience increases, salary also increases linearly.</p>
+    <p>A Pearson correlation coefficient close to +1 indicates a strong positive linear relationship between years of experience and monthly salary. This means as experience increases, salary tends to increase almost perfectly linearly.</p>
+    <p>The p-value confirms statistical significance if it is less than 0.05.</p>
   </section>
 
- 
-<section>
-  <h2>Applications of Pearson Correlation in the IT Field</h2>
-  <p>Here are some real IT-related scenarios with example data showing how Pearson correlation can be used.</p>
-
-  <h3>1. User Behavior Analysis</h3>
-  <p>Correlation between session time and number of clicks (more time usually means more clicks).</p>
-  <table>
-    <tr><th>Session Time (min)</th><th>Number of Clicks</th></tr>
-    <tr><td>5</td><td>12</td></tr>
-    <tr><td>7</td><td>18</td></tr>
-    <tr><td>3</td><td>7</td></tr>
-    <tr><td>8</td><td>20</td></tr>
-    <tr><td>4</td><td>10</td></tr>
-    <tr><td>6</td><td>15</td></tr>
-    <tr><td>9</td><td>21</td></tr>
-    <tr><td>2</td><td>5</td></tr>
-    <tr><td>10</td><td>25</td></tr>
-    <tr><td>1</td><td>3</td></tr>
-  </table>
-
-  <h3>2. Performance Metrics</h3>
-  <p>Correlation between server load (%) and response time (ms).</p>
-  <table>
-    <tr><th>Server Load (%)</th><th>Response Time (ms)</th></tr>
-    <tr><td>20</td><td>150</td></tr>
-    <tr><td>35</td><td>200</td></tr>
-    <tr><td>50</td><td>250</td></tr>
-    <tr><td>40</td><td>220</td></tr>
-    <tr><td>60</td><td>300</td></tr>
-    <tr><td>30</td><td>180</td></tr>
-    <tr><td>70</td><td>350</td></tr>
-    <tr><td>55</td><td>280</td></tr>
-    <tr><td>45</td><td>240</td></tr>
-    <tr><td>65</td><td>320</td></tr>
-  </table>
-
-  <h3>3. Software Quality & Testing</h3>
-  <p>Correlation between number of commits and bugs reported.</p>
-  <table>
-    <tr><th>Commits</th><th>Bugs Reported</th></tr>
-    <tr><td>10</td><td>3</td></tr>
-    <tr><td>15</td><td>5</td></tr>
-    <tr><td>7</td><td>2</td></tr>
-    <tr><td>20</td><td>8</td></tr>
-    <tr><td>12</td><td>4</td></tr>
-    <tr><td>18</td><td>6</td></tr>
-    <tr><td>25</td><td>9</td></tr>
-    <tr><td>5</td><td>1</td></tr>
-    <tr><td>22</td><td>7</td></tr>
-    <tr><td>30</td><td>10</td></tr>
-  </table>
-
-  <h3>4. Customer Satisfaction</h3>
-  <p>Correlation between number of app crashes and user rating (1 to 5).</p>
-  <table>
-    <tr><th>App Crashes</th><th>User Rating</th></tr>
-    <tr><td>5</td><td>3</td></tr>
-    <tr><td>2</td><td>4</td></tr>
-    <tr><td>7</td><td>2</td></tr>
-    <tr><td>1</td><td>5</td></tr>
-    <tr><td>4</td><td>3</td></tr>
-    <tr><td>3</td><td>4</td></tr>
-    <tr><td>6</td><td>2</td></tr>
-    <tr><td>0</td><td>5</td></tr>
-    <tr><td>8</td><td>1</td></tr>
-    <tr><td>2</td><td>4</td></tr>
-  </table>
-
-  <h3>5. Recommendation Systems</h3>
-  <p>Correlation between two users’ ratings on 10 products.</p>
-  <table>
-    <tr><th>User A Rating</th><th>User B Rating</th></tr>
-    <tr><td>4</td><td>5</td></tr>
-    <tr><td>3</td><td>3</td></tr>
-    <tr><td>5</td><td>4</td></tr>
-    <tr><td>2</td><td>2</td></tr>
-    <tr><td>4</td><td>5</td></tr>
-    <tr><td>1</td><td>1</td></tr>
-    <tr><td>3</td><td>3</td></tr>
-    <tr><td>5</td><td>4</td></tr>
-    <tr><td>2</td><td>3</td></tr>
-    <tr><td>4</td><td>5</td></tr>
-  </table>
-
-  <h3>6. Machine Learning Feature Selection</h3>
-  <p>Correlation between feature values and target variable.</p>
-  <table>
-    <tr><th>Feature Value</th><th>Target Variable</th></tr>
-    <tr><td>10</td><td>15</td></tr>
-    <tr><td>12</td><td>18</td></tr>
-    <tr><td>14</td><td>21</td></tr>
-    <tr><td>16</td><td>24</td></tr>
-    <tr><td>18</td><td>27</td></tr>
-    <tr><td>20</td><td>30</td></tr>
-    <tr><td>22</td><td>33</td></tr>
-    <tr><td>24</td><td>36</td></tr>
-    <tr><td>26</td><td>39</td></tr>
-    <tr><td>28</td><td>42</td></tr>
-  </table>
-
-  <h3>7. Network Security</h3>
-  <p>Correlation between login attempts and time of day (hour, 0-23).</p>
-  <table>
-    <tr><th>Login Attempts</th><th>Hour of Day</th></tr>
-    <tr><td>5</td><td>1</td></tr>
-    <tr><td>7</td><td>3</td></tr>
-    <tr><td>10</td><td>5</td></tr>
-    <tr><td>20</td><td>7</td></tr>
-    <tr><td>15</td><td>9</td></tr>
-    <tr><td>12</td><td>11</td></tr>
-    <tr><td>8</td><td>13</td></tr>
-    <tr><td>6</td><td>15</td></tr>
-    <tr><td>4</td><td>17</td></tr>
-    <tr><td>3</td><td>19</td></tr>
-  </table>
-
-  <h3>8. IT Project Management</h3>
-  <p>Correlation between hours spent on task and project delay (days).</p>
-  <table>
-    <tr><th>Hours Spent</th><th>Days Delay</th></tr>
-    <tr><td>10</td><td>1</td></tr>
-    <tr><td>12</td><td>2</td></tr>
-    <tr><td>15</td><td>3</td></tr>
-    <tr><td>9</td><td>1</td></tr>
-    <tr><td>14</td><td>2</td></tr>
-    <tr><td>20</td><td>4</td></tr>
-    <tr><td>7</td><td>1</td></tr>
-    <tr><td>16</td><td>3</td></tr>
-    <tr><td>18</td><td>3</td></tr>
-    <tr><td>22</td><td>5</td></tr>
-  </table>
-</section>
- <footer>
+  <footer>
     &copy; 2025 Judah Mathematics & IT Research & Institution
   </footer>
 </body>
