@@ -2,59 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pearson Correlation | JMIRI</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0; padding: 0; background: #f5f7fa; color: #222;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #222;
+      font-size: 18px;
     }
     header {
       background-color: #004b8d;
       color: white;
-      padding: 20px;
+      padding: 30px;
       text-align: center;
     }
     section {
+      padding: 30px 20px;
       max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+      margin: auto;
     }
-    h1, h2, h3 {
+    h1, h2 {
       color: #004b8d;
+      font-size: 28px;
     }
-    img.formula {
-      display: block;
-      max-width: 60%;
-      margin: 20px auto;
-      height: auto;
+    h3 {
+      font-size: 22px;
+    }
+    p, li {
+      font-size: 18px;
+    }
+    code {
+      background-color: #eef;
+      padding: 2px 6px;
+      display: inline-block;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    pre {
+      background-color: #eef;
+      padding: 15px;
+      overflow-x: auto;
+      font-size: 16px;
+    }
+    img {
+      max-width: 100%;
+      margin-top: 20px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      font-size: 16px;
     }
     table, th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: center;
     }
-    code {
-      background-color: #eef;
-      padding: 10px;
-      display: block;
-      white-space: pre-wrap;
-      overflow-x: auto;
-      margin: 20px 0;
-      border-radius: 6px;
-    }
     footer {
-      text-align: center;
       background-color: #002b5c;
       color: white;
-      padding: 15px 0;
-      margin-top: 50px;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -72,8 +86,8 @@
 
   <section>
     <h2>Formula</h2>
-    <p><strong>Pearson correlation (r) is calculated using the formula:</strong></p>
-    <img src="pearson_formula.png" alt="Pearson Correlation Formula" class="formula" />
+    <p>Pearson correlation (r) is calculated using the formula:</p>
+    <img src="pearson_formula.png" alt="Pearson Correlation Formula" style="max-width: 400px; display: block; margin: 20px auto;" />
   </section>
 
   <section>
@@ -84,9 +98,7 @@ Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]</pre>
 
     <h3>Manual Calculation Table</h3>
     <table>
-      <tr>
-        <th>X</th><th>Y</th><th>XY</th><th>X²</th><th>Y²</th>
-      </tr>
+      <tr><th>X</th><th>Y</th><th>XY</th><th>X²</th><th>Y²</th></tr>
       <tr><td>1</td><td>30</td><td>30</td><td>1</td><td>900</td></tr>
       <tr><td>2</td><td>35</td><td>70</td><td>4</td><td>1225</td></tr>
       <tr><td>3</td><td>38</td><td>114</td><td>9</td><td>1444</td></tr>
@@ -98,7 +110,8 @@ Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]</pre>
       <tr><td>9</td><td>60</td><td>540</td><td>81</td><td>3600</td></tr>
       <tr><td>10</td><td>64</td><td>640</td><td>100</td><td>4096</td></tr>
     </table>
-    <p>Calculate sums:</p>
+
+    <h3>Calculation</h3>
     <ul>
       <li>ΣX = 55</li>
       <li>ΣY = 470</li>
@@ -107,33 +120,27 @@ Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]</pre>
       <li>ΣY² = 23198</li>
       <li>n = 10</li>
     </ul>
+
     <p>Substitute in the formula:</p>
-    <code>r = [nΣ(XY) - ΣXΣY] / sqrt{ [nΣX² - (ΣX)²] [nΣY² - (ΣY)²] }</code><br>
     <code>r = [10 × 2887 - 55 × 470] / sqrt{ [10 × 385 - 55²] [10 × 23198 - 470²] }</code><br>
-    <code>r = (28870 - 25850) / sqrt{ (3850 - 3025) × (231980 - 220900) }</code><br>
-    <code>r = 3020 / sqrt(825 × 11080)</code><br>
+    <code>r = (28870 - 25850) / sqrt(825 × 11080)</code><br>
     <code>r ≈ 3020 / 3015.77 ≈ 1.00</code>
     <p>This result indicates a nearly perfect positive correlation.</p>
   </section>
 
   <section>
     <h2>Python Code with Graph</h2>
-    <code>
-import numpy as np
+    <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
 
-# Sample data
 X = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 Y = [30, 35, 38, 42, 45, 48, 52, 56, 60, 64]
 
-# Calculate Pearson correlation
 correlation, p_value = pearsonr(X, Y)
-
 print("Pearson Correlation Coefficient:", correlation)
 print("P-value:", p_value)
 
-# Plot
 plt.scatter(X, Y, color='blue', label='Data Points')
 plt.plot(X, np.poly1d(np.polyfit(X, Y, 1))(X), color='red', label='Best Fit Line')
 plt.title('Experience vs Salary')
@@ -141,10 +148,9 @@ plt.xlabel('Years of Experience')
 plt.ylabel('Monthly Salary (in 1000s)')
 plt.legend()
 plt.grid(True)
-plt.show()
-    </code>
+plt.show()</code></pre>
     <p><strong>Graph Output Example:</strong></p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/640px-Linear_regression.svg.png" alt="Scatter plot with line of best fit" style="max-width: 80%; display: block; margin: 20px auto;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/640px-Linear_regression.svg.png" alt="Scatter plot with line of best fit">
   </section>
 
   <section>
