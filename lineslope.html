@@ -9,41 +9,46 @@
       font-family: Arial, sans-serif;
       max-width: 800px;
       margin: 40px auto;
-      padding: 0 20px 40px 20px;
+      padding: 0 20px 40px;
       line-height: 1.6;
       color: #333;
       background-color: #f9f9f9;
     }
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       color: #2c3e50;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
     }
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 1.8em;
     }
     p {
-      margin: 15px 0;
+      margin: 1em 0;
       font-size: 1.1rem;
     }
     ul {
-      margin: 10px 0 15px 20px;
+      margin: 0.7em 0 1.2em 1.5em;
       font-size: 1.1rem;
     }
     blockquote {
       font-style: italic;
       color: #555;
       border-left: 4px solid #2980b9;
-      margin: 15px 0 30px 0;
+      margin: 1.2em 0 1.8em 0;
       padding-left: 15px;
+      background-color: #eef6fc;
+      border-radius: 4px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 1.5em;
+      margin-bottom: 2em;
     }
     th, td {
       border: 1px solid #ddd;
-      padding: 12px 15px;
+      padding: 10px 15px;
       text-align: left;
     }
     th {
@@ -57,6 +62,7 @@
       background-color: #eef;
       padding: 2px 6px;
       border-radius: 4px;
+      font-family: Consolas, monospace;
     }
     pre code {
       display: block;
@@ -66,12 +72,16 @@
       overflow-x: auto;
       font-size: 1rem;
       line-height: 1.4;
+      margin: 0.5em 0 1.2em 0;
     }
     .ml-note {
       background-color: #d4edda;
       border-left: 5px solid #28a745;
-      padding: 10px;
-      margin-top: 10px;
+      padding: 10px 15px;
+      margin-top: 0.7em;
+      margin-bottom: 1.5em;
+      border-radius: 4px;
+      font-size: 1.05rem;
     }
   </style>
 </head>
@@ -84,21 +94,15 @@
     <h2>Understanding the Straight Line Equation and Slope (<em>m</em>)</h2>
 
     <h3>1. Equation of a Straight Line: <code>y = mx + c</code></h3>
-    <p>
-      The equation <code>y = mx + c</code> represents any straight line on a 2D graph, where:
-    </p>
+    <p>The equation <code>y = mx + c</code> represents any straight line on a 2D graph, where:</p>
     <ul>
       <li><strong>m</strong> is the slope of the line (how steep it is).</li>
       <li><strong>c</strong> is the y-intercept — the point where the line crosses the y-axis (where <code>x = 0</code>).</li>
     </ul>
 
     <h3>2. Why Do We Need Two Points to Draw a Line?</h3>
-    <p>
-      To draw a unique straight line, you need at least <strong>two points</strong>. One point alone cannot define a line because infinitely many lines can pass through a single point.
-    </p>
-    <p>
-      Given two points, say <code>(x₁, y₁)</code> and <code>(x₂, y₂)</code>:
-    </p>
+    <p>To draw a unique straight line, you need at least <strong>two points</strong>. One point alone cannot define a line because infinitely many lines can pass through a single point.</p>
+    <p>Given two points, say <code>(x₁, y₁)</code> and <code>(x₂, y₂)</code>:</p>
     <ul>
       <li>You can calculate the slope <code>m</code> using the formula:
         <pre><code>m = (y₂ - y₁) / (x₂ - x₁)</code></pre>
@@ -114,9 +118,7 @@
     </blockquote>
 
     <h3>4. Understanding Slope (<em>m</em>) — Simple Explanation</h3>
-    <p>
-      The <strong>slope</strong>, often called <em>m</em>, tells us how steep a line is and in which direction it moves when we travel from one point to another on a graph.
-    </p>
+    <p>The <strong>slope</strong>, often called <em>m</em>, tells us how steep a line is and in which direction it moves when we travel from one point to another on a graph.</p>
 
     <h4>How to Understand Slope Without Complex Formulas?</h4>
     <p>Imagine you are walking on a hill:</p>
@@ -139,16 +141,13 @@
     </ul>
 
     <h4>What Does Slope <em>m</em> Actually Tell Us?</h4>
-    <p>
-      Slope <em>m</em> is all about:
-    </p>
+    <p>Slope <em>m</em> is all about:</p>
     <blockquote>
       <em>How much you go up or down (change in <em>y</em>) for every step you take left or right (change in <em>x</em>).</em>
     </blockquote>
 
     <h4>What Happens When X or Y Are Negative?</h4>
-    <p>
-      If <strong>x change is negative</strong> (you move left instead of right), slope still tells you how <em>y</em> changes, but the direction flips accordingly.<br />
+    <p>If <strong>x change is negative</strong> (you move left instead of right), slope still tells you how <em>y</em> changes, but the direction flips accordingly.<br />
       If <strong>y change is negative</strong> (you go down instead of up), slope is negative.
     </p>
 
@@ -181,9 +180,7 @@
     </table>
 
     <h4>Final Simple Explanation</h4>
-    <p>
-      Slope <em>m</em> tells us how steep a line is — how much the line goes up or down when you move left or right on the graph.
-    </p>
+    <p>Slope <em>m</em> tells us how steep a line is — how much the line goes up or down when you move left or right on the graph.</p>
   </section>
 
   <!-- Section 2: Understanding the Three Forms of a Line Equation -->
