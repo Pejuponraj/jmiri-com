@@ -69,7 +69,21 @@
     <strong>Used in Machine Learning (ML)</strong> for predictions. After training a model using data, we use this format to make predictions based on input x.
   </div>
 
-  <h2>2. Regression Line Form: <code>y - ̄y = b<sub>yx</sub>(x - ̄x)</code></h2>
+  <h2>2. Point-Slope Form: <code>y - y₁ = m(x - x₁)</code></h2>
+  <ul>
+    <li><strong>(x₁, y₁)</strong>: a known point on the line</li>
+    <li><strong>m</strong>: slope of the line</li>
+  </ul>
+  <p>This form is useful when you know the slope and one point. You can rearrange it into the form <code>y = mx + c</code> for easier graphing or prediction.</p>
+  <h3>Example</h3>
+  <p>Given a point (3, 4) and slope m = 2:</p>
+  <pre><code>y - 4 = 2(x - 3)</code></pre>
+  <p>Expanding and simplifying:</p>
+  <pre><code>y - 4 = 2x - 6
+y = 2x - 2</code></pre>
+  <p>So the equivalent linear equation is: <code>y = 2x - 2</code></p>
+
+  <h2>3. Regression Line Form: <code>y - ̄y = b<sub>yx</sub>(x - ̄x)</code></h2>
   <ul>
     <li><strong>̄y</strong>: mean of y-values</li>
     <li><strong>̄x</strong>: mean of x-values</li>
@@ -93,7 +107,7 @@
   </div>
 
   <blockquote>
-    “All forms describe the same line — they just appear in different contexts: algebra or statistics.”
+    “All forms describe the same line — they just appear in different contexts: algebra, geometry, or statistics.”
   </blockquote>
 
   <h2>Comparison Table</h2>
@@ -112,6 +126,12 @@
         <td>Algebra / ML</td>
         <td>Slope and intercept</td>
         <td>Graphing, predictions<br><strong>Used in ML</strong></td>
+      </tr>
+      <tr>
+        <td><code>y - y₁ = m(x - x₁)</code></td>
+        <td>Geometry</td>
+        <td>One point and slope</td>
+        <td>Quick line from slope and point</td>
       </tr>
       <tr>
         <td><code>y - ̄y = b<sub>yx</sub>(x - ̄x)</code></td>
